@@ -1,4 +1,4 @@
-import { ChangeEventHandler, useState } from 'react';
+import { useState } from 'react';
 import { BookItemModel } from '../models';
 import BookTable from './bookTable';
 import LabelInput from './LabelInput';
@@ -17,16 +17,18 @@ const FilterableBookTable = ({
   const [filterText, setFilterText] = useState('');
 
   return (
-    <div className="filterable-book-table">
-      <LabelInput label="filter" value={filterText} setValue={setFilterText}/>
-      <BookTable
-        bookItems={books.filter(
-          (x) => !filterText || x.name.includes(filterText),
-        )}
-        onClickDelete={onClickDelete}
-        onClickLendingSwitch={onClickLendingSwitch}
-      />
-    </div>
+    <>
+      <LabelInput label="filter" value={filterText} setValue={setFilterText} />
+      <div className="filterable-book-table">
+        <BookTable
+          bookItems={books.filter(
+            (x) => !filterText || x.name.includes(filterText),
+          )}
+          onClickDelete={onClickDelete}
+          onClickLendingSwitch={onClickLendingSwitch}
+        />
+      </div>
+    </>
   );
 };
 export default FilterableBookTable;
