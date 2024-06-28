@@ -16,9 +16,6 @@ const FilterableBookTable = ({
 }: Props) => {
   const [filterText, setFilterText] = useState('');
 
-  const handleChangeFilterText: ChangeEventHandler<HTMLInputElement> = (e) =>
-    setFilterText(e.target.value);
-
   return (
     <div className="filterable-book-table">
       <LabelInput label="filter" value={filterText} setValue={setFilterText}/>
