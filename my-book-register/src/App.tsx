@@ -9,7 +9,17 @@ function App() {
   const [books, setBooks] = useState<BookItemModel[]>([]);
 
   const handleClickButton = (): void => {
-    fetch(`https://www.googleapis.com/books/v1/volumes?q=isbn:${isbn}`)
+    //第４問　コピペしたときに含まれるハイフンとかをなくしたい
+    let formatIsbn=[...isbn].join("");
+    formatIsbn=formatIsbn.replace("-", "");
+    for(let i=0;i<isbn.length;i++){
+      if(Number.isNaN(Number(isbn[i]))){
+        formatIsbn=formatIsbn.replace(isbn[i],"");
+      }
+    }
+    // console.log(formatIsbn);
+
+    fetch(`https://www.googleapis.com/books/v1/volumes?q=isbn:${formatIsbn}`)
       .then((response) => response.json())
       .then((data) => {
         if (data.totalItems === 0) {
